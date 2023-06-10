@@ -123,12 +123,13 @@ Status: 204 No Content
 In the codebase, there are parts that are highly efficient and well-optimized. These include:
 
 - All nominal operaions in the API have unit tests.
-- Proper handling and logging of errors or exceptions to ensure the stability and reliability of the services.
+- Proper handling and logging of errors or exceptions to ensure the reliability of the services.
 
 However, there are also areas that could benefit from more time investment to improve efficiency and code quality:
 
 - Security/validation enhancements: Implement proper input validation, sanitization, and security measures to protect against common vulnerabilities.
 - Scalability considerations: Evaluate the system's scalability and plan for potential limitations. Consider implementing features like being able to integrate different third party services dynamically.
+- Include additional unit tests covering more detailed scenarios, assertions, and validations.
 - Code organization and documentation: Ensure the codebase follows good coding practices, maintainable structure, and proper documentation. Improve code readability and maintainability by adding inline comments, using descriptive function and variable names, and applying coding style conventions consistently.
 
 Happy coding!
