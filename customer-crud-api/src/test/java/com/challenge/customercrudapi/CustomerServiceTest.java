@@ -38,11 +38,11 @@ public class CustomerServiceTest {
         response.setValid(true);
         response.setCountryCode("CC");
         response.setCountryName("CN");
-        Mockito.when(this.restTemplate.getForObject("http://localhost:8999/api/verifyNumber/123456789", NumVerifyResponse.class, new Object[0])).thenReturn(response);
+        Mockito.when(this.restTemplate.getForObject("http://localhost:8999/api/verifyNumber/123456789", NumVerifyResponse.class)).thenReturn(response);
         Mockito.when(this.customerRepository.save(customer)).thenReturn(customer);
         ResponseEntity<Customer> createdCustomer = this.customerService.save(customer);
         Assertions.assertEquals(HttpStatus.CREATED, createdCustomer.getStatusCode());
-        Assertions.assertEquals("John Doe", ((Customer) createdCustomer.getBody()).getName());
+        Assertions.assertEquals("John Doe", createdCustomer.getBody().getName());
         Mockito.verify(this.customerRepository, Mockito.times(1));
     }
 
@@ -57,7 +57,7 @@ public class CustomerServiceTest {
         response.setValid(true);
         response.setCountryCode("CC");
         response.setCountryName("CN");
-        Mockito.when(this.restTemplate.getForObject("http://localhost:8999/api/verifyNumber/123456789", NumVerifyResponse.class, new Object[0])).thenReturn(response);
+        Mockito.when(this.restTemplate.getForObject("http://localhost:8999/api/verifyNumber/123456789", NumVerifyResponse.class)).thenReturn(response);
         Mockito.when(this.customerRepository.findById(customerId)).thenReturn(Optional.of(customer));
         ResponseEntity<Customer> retrievedCustomer = this.customerService.findById(customerId);
         Assertions.assertEquals(customerId, retrievedCustomer.getBody().getId());
@@ -74,6 +74,12 @@ public class CustomerServiceTest {
         Customer updatedCustomer = new Customer();
         updatedCustomer.setId(customerId);
         updatedCustomer.setName("Jane Smith");
+        updatedCustomer.setNumber("123456789");
+        NumVerifyResponse response = new NumVerifyResponse();
+        response.setValid(true);
+        response.setCountryCode("CC");
+        response.setCountryName("CN");
+        Mockito.when(this.restTemplate.getForObject("http://localhost:8999/api/verifyNumber/123456789", NumVerifyResponse.class)).thenReturn(response);
         Mockito.when(this.customerRepository.findById(customerId)).thenReturn(Optional.of(existingCustomer));
         Mockito.when(this.customerRepository.save(updatedCustomer)).thenReturn(updatedCustomer);
         ResponseEntity<Customer> modifiedCustomer = this.customerService.updateCustomer(customerId, updatedCustomer);
