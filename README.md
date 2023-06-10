@@ -131,5 +131,6 @@ However, there are also areas that could benefit from more time investment to im
 - Scalability considerations: Evaluate the system's scalability and plan for potential limitations. Consider implementing features like being able to integrate different third party services dynamically.
 - Include additional unit tests covering more detailed scenarios, assertions, and validations.
 - Code organization and documentation: Ensure the codebase follows good coding practices, maintainable structure, and proper documentation. Improve code readability and maintainability by adding inline comments, using descriptive function and variable names, and applying coding style conventions consistently.
+- Conform to better GIT practices.
 
 Happy coding!
