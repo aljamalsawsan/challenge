@@ -48,7 +48,7 @@ Once the microservices and frontend are running, you can access the application 
 
 ```json
 {
-  "phoneNumber": "14158586273"
+  "number": "14158586273"
 }
 ```
 
