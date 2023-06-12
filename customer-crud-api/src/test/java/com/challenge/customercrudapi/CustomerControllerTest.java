@@ -29,11 +29,11 @@ public class CustomerControllerTest {
     public void createCustomerTest() {
         Customer customer = new Customer();
         customer.setName("John Doe");
-        Mockito.when(this.customerService.save(customer)).thenReturn(new ResponseEntity(customer, HttpStatus.CREATED));
+        Mockito.when(this.customerService.save(customer)).thenReturn(new ResponseEntity<>(customer, HttpStatus.CREATED));
         ResponseEntity<Customer> response = this.customerController.createCustomer(customer);
         Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
         Assertions.assertEquals(customer, response.getBody());
-        ((CustomerService) Mockito.verify(this.customerService, Mockito.times(1))).save(customer);
+        Mockito.verify(this.customerService, Mockito.times(1)).save(customer);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class CustomerControllerTest {
         Customer customer = new Customer();
         customer.setId(customerId);
         customer.setName("John Doe");
-        Mockito.when(this.customerService.findById(customerId)).thenReturn(new ResponseEntity(customer, HttpStatus.CREATED));
+        Mockito.when(this.customerService.findById(customerId)).thenReturn(new ResponseEntity<>(customer, HttpStatus.CREATED));
         ResponseEntity<Customer> response = this.customerController.getCustomerById(customerId);
         Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
         Assertions.assertEquals(customer, response.getBody());
@@ -55,7 +55,7 @@ public class CustomerControllerTest {
         Customer customer = new Customer();
         customer.setId(customerId);
         customer.setName("John Doe");
-        Mockito.when(this.customerService.updateCustomer(customerId, customer)).thenReturn(new ResponseEntity(customer, HttpStatus.OK));
+        Mockito.when(this.customerService.updateCustomer(customerId, customer)).thenReturn(new ResponseEntity<>(customer, HttpStatus.OK));
         ResponseEntity<Customer> response = this.customerController.updateCustomer(customerId, customer);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertEquals(customer, response.getBody());
@@ -65,7 +65,7 @@ public class CustomerControllerTest {
     @Test
     public void deleteCustomerTest() {
         long customerId = 1L;
-        Mockito.when(this.customerService.deleteById(customerId)).thenReturn(new ResponseEntity(HttpStatus.NO_CONTENT));
+        Mockito.when(this.customerService.deleteById(customerId)).thenReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT));
         ResponseEntity<HttpStatus> response = this.customerController.deleteCustomer(customerId);
         Assertions.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         Mockito.verify(this.customerService, Mockito.times(1)).deleteById(customerId);

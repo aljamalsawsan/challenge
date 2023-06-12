@@ -58,7 +58,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private NumVerifyResponse getNumberInfo(String number) {
-        return this.restTemplate.getForObject(this.thirdPartyURL + number, NumVerifyResponse.class, new Object[0]);
+        return this.restTemplate.getForObject(this.thirdPartyURL + number, NumVerifyResponse.class);
     }
 
     public ResponseEntity<Customer> updateCustomer(long id, Customer customer) {

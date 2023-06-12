@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping({"/api"})
 public class CustomerController {
     private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
@@ -29,7 +29,7 @@ public class CustomerController {
     @CrossOrigin(origins = {"http://localhost:3000"})
     @GetMapping({"/customers/{id}"})
     public ResponseEntity<Customer> getCustomerById(@PathVariable("id") long id) {
-        log.debug("START getCustomerById : {}", Long.valueOf(id));
+        log.debug("START getCustomerById : {}", id);
         return this.customerService.findById(id);
     }
 
@@ -43,14 +43,14 @@ public class CustomerController {
     @CrossOrigin(origins = {"*"})
     @PutMapping({"/customers/{id}"})
     public ResponseEntity<Customer> updateCustomer(@PathVariable("id") long id, @RequestBody Customer customer) {
-        log.debug("START updateCustomer, id : {}, entity: {}", Long.valueOf(id), customer);
+        log.debug("START updateCustomer, id : {}, entity: {}", id, customer);
         return this.customerService.updateCustomer(id, customer);
     }
 
     @CrossOrigin(origins = {"*"})
     @DeleteMapping({"/customers/{id}"})
     public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") long id) {
-        log.debug("START deleteCustomer : {}", Long.valueOf(id));
+        log.debug("START deleteCustomer : {}", id);
         return this.customerService.deleteById(id);
     }
 }
